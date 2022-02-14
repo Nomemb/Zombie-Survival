@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigid;
     private Item item;
     private WeaponManager weaponManager;
-    private Weapon weapon;
-    private GameObject currentGunInfo;
+    private Weapon currentGunInfo;
     private float fireDelay; // 총 재사격 가능 시간
     private bool isFireDelay; 
     Animator anim;
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
         item = GetComponent<Item>();
         anim = GetComponent<Animator>();
         weaponManager = FindObjectOfType<WeaponManager>();
-        weapon = FindObjectOfType<Weapon>();
     }
 
     // Update is called once per frame
@@ -50,12 +48,12 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         fireDelay += Time.deltaTime;
-        currentGunInfo = weaponManager.weapons[weaponManager.currentWeaponIndex];
+        currentGunInfo = weaponManager.weapons[weaponManager.currentWeaponIndex].GetComponent<Weapon>();
         isFireDelay = fireDelay > currentGunInfo.GetComponent<Weapon>().weaponRPM;
         if (Input.GetKey(KeyCode.Space) && isFireDelay)
         {
             anim.SetTrigger("Shoot");
-            weapon.Shoot();
+            currentGunInfo.Shoot();
             fireDelay = 0;
         }
         

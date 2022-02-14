@@ -23,6 +23,8 @@ public class WeaponManager : MonoBehaviour
     void Update()
     {
         EnableWeaponUpdate();
+        // 테스트용
+        TestWeapon();
         Swap();
     }
 
@@ -52,6 +54,16 @@ public class WeaponManager : MonoBehaviour
     {
         // 아마 경험치 클래스로 바꿔줘야 할 듯
         // 플레이어의 점수를 계속 받아와서 일정 수준의 경험치를 넘게 되면 해당 총을 사용 가능 (enableWeapon(true))으로 바꿔줌.
+    }
+
+    // 테스트용
+    private void TestWeapon()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            hasWeapons[i] = true;
+            enableWeapons[i] = true;
+        }
     }
     // 총 바꿔주는 함수
     private void Swap()

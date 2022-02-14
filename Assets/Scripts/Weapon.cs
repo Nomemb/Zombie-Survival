@@ -27,16 +27,11 @@ public class Weapon : MonoBehaviour
 
     IEnumerator ShootCoroutine()
     {
-        float bulletSurvivalTime = 0;
         GameObject instantBullet = Instantiate(bulletPrefabs, bulletPos.position, playerController.transform.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = bulletPos.forward * 50;
-        bulletSurvivalTime += Time.deltaTime;
-
-        if (bulletSurvivalTime > weaponRange)
-        {
-            Destroy(instantBullet);
-        }
+        yield return new WaitForSeconds(weaponRange);
+        Destroy(instantBullet);
         yield return null;
     }
 

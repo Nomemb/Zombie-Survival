@@ -141,9 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sniper
   weaponDamage: 200
-  weaponRPM: 1
-  weaponRange: 100
-  maxBullet: 0
+  weaponRPM: 1.5
+  weaponRange: 1
+  maxBullet: 10
   currentBullet: 0
   bulletPos: {fileID: 190496131}
   bulletPrefabs: {fileID: 8267430409273687099, guid: 108e5239bfbe8614d9a0f222f2d3de4a,
@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190496130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.025, y: 0.711, z: 0.547}
+  m_LocalPosition: {x: -0.02, y: 0.711, z: 1.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1784065976}
@@ -560,9 +560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   weaponDamage: 55
-  weaponRPM: 0.7
-  weaponRange: 10
-  maxBullet: 0
+  weaponRPM: 1
+  weaponRange: 0.17
+  maxBullet: 20
   currentBullet: 0
   bulletPos: {fileID: 190496131}
   bulletPrefabs: {fileID: 8267430409273687099, guid: 108e5239bfbe8614d9a0f222f2d3de4a,
@@ -928,8 +928,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Pistol
   weaponDamage: 20
-  weaponRPM: 0.5
-  weaponRange: 20
+  weaponRPM: 0.7
+  weaponRange: 0.3
   maxBullet: 1000
   currentBullet: 0
   bulletPos: {fileID: 190496131}
@@ -1331,9 +1331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: AK47
   weaponDamage: 40
-  weaponRPM: 0.4
-  weaponRange: 50
-  maxBullet: 0
+  weaponRPM: 0.55
+  weaponRange: 0.4
+  maxBullet: 40
   currentBullet: 0
   bulletPos: {fileID: 190496131}
   bulletPrefabs: {fileID: 8267430409273687099, guid: 108e5239bfbe8614d9a0f222f2d3de4a,
@@ -1715,8 +1715,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890984645}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.897747, y: 12.233136, z: -16.737816}
-  m_LocalScale: {x: 1.3650441, y: 1, z: 39.884155}
+  m_LocalPosition: {x: -8.053, y: 12.233136, z: -16.737816}
+  m_LocalScale: {x: 1.3650453, y: 1, z: 42.43136}
   m_Children: []
   m_Father: {fileID: 55803044}
   m_RootOrder: 3
@@ -1871,8 +1871,8 @@ MonoBehaviour:
   weaponName: UZI
   weaponDamage: 10
   weaponRPM: 0.25
-  weaponRange: 15
-  maxBullet: 0
+  weaponRange: 0.2
+  maxBullet: 100
   currentBullet: 0
   bulletPos: {fileID: 190496131}
   bulletPrefabs: {fileID: 8267430409273687099, guid: 108e5239bfbe8614d9a0f222f2d3de4a,
