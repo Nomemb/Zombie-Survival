@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+        currentBullet = maxBullet;
     }
     public void Shoot()
     {

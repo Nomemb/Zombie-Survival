@@ -63,6 +63,7 @@ public class WeaponManager : MonoBehaviour
         {
             hasWeapons[i] = true;
             enableWeapons[i] = true;
+            
         }
     }
     // 총 바꿔주는 함수

@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Game
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 392}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 342}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 135
+  controlID: 148
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 342}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 136
+  controlID: 149
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,10 +167,10 @@ MonoBehaviour:
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
-  - {fileID: 12}
   - {fileID: 14}
+  - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -433,9 +433,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -3.148838, y: -5.0843067, z: 0.6652193}
+    m_Target: {x: 253.776, y: 178.83513, z: -18.259338}
     speed: 2
-    m_Value: {x: -3.148838, y: -5.0843067, z: 0.6652193}
+    m_Value: {x: 253.776, y: 178.83513, z: -18.259338}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -481,13 +481,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.33271265, y: -0.64366525, z: 0.36716986, w: -0.58325833}
+    m_Target: {x: -0.01588048, y: -0.047068987, z: 0.00074819516, w: -0.9987696}
     speed: 2
-    m_Value: {x: -0.33271155, y: -0.6436631, z: 0.36716864, w: -0.58325636}
+    m_Value: {x: -0.01588048, y: -0.04706899, z: 0.00074819516, w: -0.9987696}
   m_Size:
-    m_Target: 19.442345
+    m_Target: 150.4579
     speed: 2
-    m_Value: 19.442345
+    m_Value: 150.4579
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -505,7 +505,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.017686855, y: 0.01649236, z: 0.00029043597, w: 0.9997119}
+  m_LastSceneViewRotation: {x: -0.15436664, y: -0.071654804, z: 0.011225287, w: -0.9853519}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 14100
+  m_LastSelectedObjectID: -38250
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -677,9 +677,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 14370000
-      m_LastClickedID: 14100
-      m_ExpandedIDs: 66fbffffde3600000c370000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 66fbffff06370000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -838,15 +838,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: "C:\\Users\\nkj12\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\coding\\Zombie
-    Survival"
+  m_LastProjectPath: "C:\\Users\\nkj12\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\Github\\Zombie-Survival"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fc380000
-    m_LastClickedID: 14588
-    m_ExpandedIDs: 00000000d8380000da380000dc380000de380000e0380000e238000000ca9a3b
+    m_SelectedIDs: 34390000
+    m_LastClickedID: 14644
+    m_ExpandedIDs: 00000000283900002a3900002c3900002e3900003039000032390000343900003639000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -874,7 +873,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d8380000da380000dc380000de380000e0380000e2380000
+    m_ExpandedIDs: 00000000283900002a3900002c3900002e39000030390000323900003439000036390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -901,8 +900,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000ac4b0000e0570000ac420000da490000844a0000dc4a0000784b0000d0440000b8cbffff384b0000144700003a47000088580000385800005a430000d243000078440000cc4300008044000034580000584f00005c4f00004c4f00003e5300002c5900004a3d0000583e0000be3c00002c3d0000363d0000b23f000064c10000ee4400004e340000583400003c3800009e3a00005a410000d4540000ce3d00004c3c0000763f0000583f000000000000e4360000ea370000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c6230000ac4b0000e0570000ac420000da490000844a0000dc4a0000784b0000d0440000b8cbffff384b0000144700003a47000088580000385800005a430000d243000078440000cc4300008044000034580000584f00005c4f00004c4f00003e5300002c5900004a3d0000583e0000be3c00002c3d0000363d0000b23f000064c10000ee4400004e340000583400003c3800009e3a00005a410000d4540000ce3d00004c3c0000763f0000583f0000e4360000ea37000000000000564c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
