@@ -31,5 +31,4 @@ public class PlayerHP : MonoBehaviour
         currentHP = maxHP;
     }
 
-    
 }
