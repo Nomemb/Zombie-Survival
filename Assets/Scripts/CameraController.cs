@@ -10,34 +10,37 @@ public class CameraController : MonoBehaviour
     public Vector3 offset;
     public BoxCollider bound;
 
+    [SerializeField]
     private Vector3 minBound;
+    [SerializeField]
     private Vector3 maxBound;
-
-    private float halfWidth;
-    private float halfHeight;
 
     private Camera theCamera;
 
     private void Start()
     {
         theCamera = GetComponent<Camera>();
-        minBound = bound.bounds.min;
-        maxBound = bound.bounds.max;
-
-        halfHeight = theCamera.orthographicSize;
-        halfWidth = halfWidth * Screen.width / Screen.height; 
     }
     void Update()
     {
-        transform.position = playerTarget.position + offset;
+        CameraChasePlayer();
+    }
 
-        // 필드 밖은 안 보이게 설정
-        //float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
-        ////float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
-        //float clampedZ = Mathf.Clamp(this.transform.position.z, minBound.z + halfHeight, maxBound.z - halfHeight);
-
-        //this.transform.position = new Vector3(clampedX, this.transform.position.y, clampedZ);
-        ////this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.y);
+    private void CameraChasePlayer()
+    {
+        if (playerTarget.position.x >= minBound.x && playerTarget.position.x <= maxBound.x &&
+           playerTarget.position.z >= minBound.z && playerTarget.position.z <= maxBound.z)
+        {
+            transform.position = playerTarget.position + offset;
+        }
+        else if(playerTarget.position.x >= minBound.x && playerTarget.position.x <= maxBound.x)
+        {
+            transform.position = new Vector3(playerTarget.position.x, playerTarget.position.y, transform.position.z )+ offset;
+        }
+        else if (playerTarget.position.z >= minBound.z && playerTarget.position.z <= maxBound.z)
+        {
+            transform.position = new Vector3(transform.position.x, playerTarget.position.y, playerTarget.position.z) + offset;
+        }
 
     }
 }
