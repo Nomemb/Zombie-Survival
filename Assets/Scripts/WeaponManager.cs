@@ -12,8 +12,11 @@ public class WeaponManager : MonoBehaviour
     public int currentWeaponIndex;
     private void Start()
     {
+
         hasWeapons = new bool[weapons.Length];
         enableWeapons = new bool[weapons.Length];
+        // 테스트용
+        TestWeapon();
         // 권총은 기본 아이템이므로 시작부터 보유처리해줌
         hasWeapons[0] = true;
         enableWeapons[0] = true;
@@ -23,8 +26,8 @@ public class WeaponManager : MonoBehaviour
     void Update()
     {
         EnableWeaponUpdate();
-        // 테스트용
-        TestWeapon();
+
+
         Swap();
     }
 
@@ -63,6 +66,7 @@ public class WeaponManager : MonoBehaviour
         {
             hasWeapons[i] = true;
             enableWeapons[i] = true;
+            weapons[i].GetComponent<Weapon>().currentBullet = weapons[i].GetComponent<Weapon>().maxBullet;
             
         }
     }
@@ -115,6 +119,15 @@ public class WeaponManager : MonoBehaviour
         currentWeapon.SetActive(false);
         currentWeapon = weapons[_index];
         currentWeaponIndex = _index;
+        currentWeapon.SetActive(true);
+    }    
+
+    public void OutOfAmmo()
+    {
+        currentWeapon.SetActive(false);
+        hasWeapons[currentWeaponIndex] = false;
+        currentWeapon = weapons[0];
+        currentWeaponIndex = 0;
         currentWeapon.SetActive(true);
     }
 }

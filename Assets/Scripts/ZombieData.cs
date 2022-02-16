@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "ZombieData", menuName = "ZombieData", order = 1)]
 public class ZombieData : ScriptableObject
 {
     [SerializeField]
@@ -10,4 +11,13 @@ public class ZombieData : ScriptableObject
     [SerializeField]
     private int zombieHP;
     public int ZombieHP { get { return zombieHP; } }
+    [SerializeField]
+    private int zombieDamage;
+    public int ZombieDamage { get { return zombieDamage; } }
+    [SerializeField]
+    private float zombieAttackSpeed;
+    public float ZombieAttackSpeed { get { return zombieAttackSpeed; } }
+    [SerializeField]
+    private float zombieWalkSpeed;
+    public float ZombieWalkSpeed { get { return zombieWalkSpeed; } }
 }
