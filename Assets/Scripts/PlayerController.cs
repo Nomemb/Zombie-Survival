@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Rigidbody myRigid;
+    private CapsuleCollider capsuleCollider;
     private Item item;
     private WeaponManager weaponManager;
     private Weapon currentWeapon;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         myRigid = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         item = GetComponent<Item>();
         anim = GetComponent<Animator>();
         weaponManager = FindObjectOfType<WeaponManager>();

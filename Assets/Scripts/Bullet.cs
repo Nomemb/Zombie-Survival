@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private int bulletDamage;
+    public int bulletDamage;
 
     private WeaponManager weaponManager;
-    private GameObject currentGunInfo;
+    public GameObject currentGunInfo;
     private void Start()
     {
         weaponManager = FindObjectOfType<WeaponManager>();
