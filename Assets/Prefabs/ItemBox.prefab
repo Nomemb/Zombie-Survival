@@ -124,4 +124,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunDropRate: 65
+  itemPrefab: {fileID: 666617369670705774}
   destinationPos: {x: 0, y: 0.5, z: 0}

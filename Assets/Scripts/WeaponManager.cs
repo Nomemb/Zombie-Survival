@@ -44,7 +44,7 @@ public class WeaponManager : MonoBehaviour
             {
                 hasWeapons[randomWeapon] = true;
                 weapons[randomWeapon].GetComponent<Weapon>().currentBullet = weapons[randomWeapon].GetComponent<Weapon>().maxBullet;
-                // UI : weapons[randomWeapon].GetComponent<Weapon>().WeaponName 을 획득했습니다!
+                Debug.Log(weapons[randomWeapon].GetComponent<Weapon>().weaponName + " 을 획득했습니다!");
                 return;
             }
 

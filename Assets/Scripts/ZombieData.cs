@@ -18,6 +18,7 @@ public class ZombieData : ScriptableObject
     private float zombieAttackSpeed;
     public float ZombieAttackSpeed { get { return zombieAttackSpeed; } }
     [SerializeField]
-    private float zombieWalkSpeed;
-    public float ZombieWalkSpeed { get { return zombieWalkSpeed; } }
+    private int zombieDropRate;
+    public int ZombieDropRate { get { return zombieDropRate; } }
+
 }
