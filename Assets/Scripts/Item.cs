@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     [SerializeField]
     private int gunDropRate;
 
+    public GameObject itemPrefab;
     private Rigidbody myRigid;
     private Vector3 startPos;
     private bool direction;
@@ -54,14 +55,13 @@ public class Item : MonoBehaviour
         // 일정 확률로 총이 드롭됐을 땐 현재 enable인 총들 충에서 또 랜덤으로 가져옴.
         if (Random.Range(1, 100) < gunDropRate)
         {
-            Debug.Log("총 드랍!");
             weaponManager.GetRandomWeapon();
 
         }
         // 그 이외의 경우에는 HP가 드롭
         else
         {
-            Debug.Log("HP 회복!");
+            Debug.Log("HP를 회복했습니다!");
 
             GetHPItem();
         }
@@ -80,6 +80,15 @@ public class Item : MonoBehaviour
         {
             GetItem();
             Destroy(this.gameObject);
+        }
+    }
+
+    public void DropItem(Vector3 _position, int _dropRate)
+    {
+        int rand = Random.Range(0, 100);
+        if(_dropRate > rand)
+        {
+            GameObject item = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
         }
     }
 }

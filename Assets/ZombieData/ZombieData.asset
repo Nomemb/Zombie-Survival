@@ -16,4 +16,4 @@ MonoBehaviour:
   zombieHP: 50
   zombieDamage: 20
   zombieAttackSpeed: 0.5
-  zombieWalkSpeed: 16
+  zombieDropRate: 50
