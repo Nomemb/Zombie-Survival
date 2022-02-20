@@ -8,7 +8,11 @@ public class Zombie : MonoBehaviour
     [SerializeField]
     private ZombieData zombieData;
     private Rigidbody rigidbody;
-    private CapsuleCollider capsuleCollider;
+    private BoxCollider boxCollider;
+    public BoxCollider meleeArea;
+    public GameObject bulletPrefabs;
+
+
 
     [SerializeField]
     private Transform target; // 쫓을 타겟 ( 플레이어 )
@@ -17,19 +21,39 @@ public class Zombie : MonoBehaviour
     
     private NavMeshAgent nav;
     public int zombieHP;
+    public int zombieDamage;
+    public float zombieAttackSpeed;
+    public string zombieName;
     private Animator anim;
-    private bool isChase;
 
+
+    private bool isChase;
+    private bool isAttack;
+
+    private Renderer[] renderer;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        boxCollider = GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         item = FindObjectOfType<Item>();
 
+        renderer = GetComponentsInChildren<Renderer>();
         zombieHP = zombieData.ZombieHP;
+        zombieDamage = zombieData.ZombieDamage;
+        zombieAttackSpeed = zombieData.ZombieAttackSpeed;
+        zombieName = zombieData.ZombieName;
+
+        
+        if(zombieName == "Boss Zombie")
+        {
+            foreach (Renderer mesh in renderer)
+            {
+                mesh.material.color = Color.red;
+            }            
+        }
         Invoke("ChaseStart", 0.5f);
     }
 
@@ -47,9 +71,73 @@ public class Zombie : MonoBehaviour
     {
         isChase = true;
     }
+
+    private void Targeting()
+    {
+        float targetRadius = 0f;
+        float targetRange = 0f;
+
+        if(zombieName == "Normal Zombie")
+        {
+            targetRadius = 1f;
+            targetRange = 0.3f;
+        }
+        else if(zombieName == "Boss Zombie")
+        {
+            targetRadius = 0.5f;
+            targetRange = 10f;
+        }
+
+
+        Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+        if(rayHits.Length > 0 && !isAttack)
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        isChase = false;
+        isAttack = true;
+        nav.isStopped = true;
+        anim.SetBool("isAttack", isAttack);
+
+
+        if (zombieName == "Normal Zombie")
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            meleeArea.enabled = true;
+
+
+            yield return new WaitForSeconds(zombieAttackSpeed);
+            meleeArea.enabled = false;
+        }
+        else if (zombieName == "Boss Zombie")
+        {
+            yield return new WaitForSeconds(0.5f);
+            GameObject instantBullet = Instantiate(bulletPrefabs, transform.position, transform.rotation);
+            instantBullet.GetComponent<EnemyBullet>().bulletDamage = zombieDamage;
+            Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+            // 플레이어 방향으로 던지게 수정할 예정
+            rigidBullet.velocity = transform.forward * 5;
+
+            yield return new WaitForSeconds(zombieAttackSpeed);
+        }
+
+
+        isChase = true;
+        isAttack = false;
+        nav.isStopped = false;
+        anim.SetBool("isAttack", isAttack);
+    }
     private void FixedUpdate()
     {
         FreezeVelocity();
+        FreezeRotation();
+        Targeting();
     }
     private void FreezeVelocity()
     {
@@ -61,22 +149,40 @@ public class Zombie : MonoBehaviour
         }
     }
 
+    private void FreezeRotation()
+    {
+        rigidbody.angularVelocity = Vector3.zero;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("playerBullet"))
+        if (other.CompareTag("playerBullet") || other.CompareTag("BossBullet"))
         {
-            Bullet bullet = other.GetComponent<Bullet>();
-            zombieHP -= bullet.bulletDamage;
-            // 넉백
-            nav.isStopped = true;
-            Vector3 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
-
-
-            // sniper총은 관통탄으로 처리
-            if (other.GetComponent<Bullet>().currentGunInfo.GetComponent<Weapon>().weaponName != "Sniper")
+            Vector3 reactVec = Vector3.zero;
+            if (other.CompareTag("playerBullet"))
             {
-                Destroy(other.gameObject);
+                Bullet bullet = other.GetComponent<Bullet>();
+                zombieHP -= bullet.bulletDamage;
+
+                nav.isStopped = true;
+                reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
+                // sniper총은 관통탄으로 처리
+                if (other.GetComponent<Bullet>().currentGunInfo.GetComponent<Weapon>().weaponName != "Sniper")
+                {
+                    Destroy(other.gameObject);
+                }
             }
+            else
+            {
+                EnemyBullet bullet = other.GetComponent<EnemyBullet>();
+                zombieHP -= bullet.bulletDamage;
+                nav.isStopped = true;
+                reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
+                Destroy(other.gameObject);
+
+            }
+
+
             StartCoroutine(OnDamage(reactVec));
 
         }
@@ -101,7 +207,7 @@ public class Zombie : MonoBehaviour
             nav.isStopped = true;
             anim.SetTrigger("death");
             rigidbody.useGravity = false;
-            capsuleCollider.enabled = false;
+            boxCollider.enabled = false;
             yield return new WaitForSeconds(2.5f);
             // 아이템드롭
             item.DropItem(transform.position, zombieData.ZombieDropRate);

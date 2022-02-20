@@ -9,6 +9,8 @@ TagManager:
   - playerBullet
   - Zombie
   - EnemyBullet
+  - BossBullet
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -22,9 +24,9 @@ TagManager:
   - Zombie
   - Wall
   - EnemyBullet
-  - 
-  - 
-  - 
+  - Player
+  - BossZombie
+  - BossBullet
   - 
   - 
   - 

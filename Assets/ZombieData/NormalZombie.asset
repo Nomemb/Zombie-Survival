@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970b922a1e7bb9a4bb0af5cf90e79f7b, type: 3}
-  m_Name: ZombieData
+  m_Name: NormalZombie
   m_EditorClassIdentifier: 
   zombieName: Normal Zombie
   zombieHP: 50
   zombieDamage: 20
-  zombieAttackSpeed: 0.5
+  zombieAttackSpeed: 1
   zombieDropRate: 50
