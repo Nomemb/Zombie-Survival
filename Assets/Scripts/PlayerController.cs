@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         playerHP = GetComponent<PlayerHP>();
         item = GetComponent<Item>();
         anim = GetComponent<Animator>();
+
         weaponManager = FindObjectOfType<WeaponManager>();
     }
 
@@ -88,17 +89,29 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        // enemyBullet 스크립트로 빼줄거임
         if (other.CompareTag("EnemyBullet"))
+        {
+
+            if (!isDamage)
+            {
+                playerHP.CurrentHP -= other.GetComponent<EnemyBullet>().bulletDamage;
+                Vector3 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
+
+                StartCoroutine(OnDamage(reactVec));
+            }
+        }
+        else if (other.CompareTag("BossBullet"))
         {
             if (!isDamage)
             {
                 playerHP.CurrentHP -= other.GetComponent<EnemyBullet>().bulletDamage;
                 Vector3 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
-                StartCoroutine(OnDamage(reactVec));
-                Destroy(other.gameObject);
 
+                StartCoroutine(OnDamage(reactVec));
+            }
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                Destroy(other.gameObject);
             }
         }
     }
@@ -106,8 +119,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator OnDamage(Vector3 reactVec)
     {
         isDamage = true;
+        
+
         myRigid.AddForce(reactVec * 10, ForceMode.Impulse);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
         isDamage = false;
         
         yield return null;
