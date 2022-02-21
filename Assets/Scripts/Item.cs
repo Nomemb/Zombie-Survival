@@ -52,19 +52,30 @@ public class Item : MonoBehaviour
 
     public void GetItem()
     {
-        // 일정 확률로 총이 드롭됐을 땐 현재 enable인 총들 충에서 또 랜덤으로 가져옴.
-        if (Random.Range(1, 100) < gunDropRate)
-        {
-            weaponManager.GetRandomWeapon();
-
-        }
-        // 그 이외의 경우에는 HP가 드롭
-        else
+        // 아직 아무 총도 해금되지 않았다면 체력만 회복
+        if(weaponManager.enableWeapons[1] == false)
         {
             Debug.Log("HP를 회복했습니다!");
 
             GetHPItem();
         }
+        else
+        {
+            // 일정 확률로 총이 드롭됐을 땐 현재 enable인 총들 충에서 또 랜덤으로 가져옴.
+            if (Random.Range(0, 100) < gunDropRate)
+            {
+                weaponManager.GetRandomWeapon();
+
+            }
+            // 그 이외의 경우에는 HP가 드롭
+            else
+            {
+                Debug.Log("HP를 회복했습니다!");
+
+                GetHPItem();
+            }
+        }
+
     }
 
     // 체력을 최대치로 회복 ( 차후에 일정 수치만큼 회복으로 바꿀수도 있음 ) 
@@ -88,7 +99,7 @@ public class Item : MonoBehaviour
         int rand = Random.Range(0, 100);
         if(_dropRate > rand)
         {
-            GameObject item = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
+            GameObject newItem = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
         }
     }
 }

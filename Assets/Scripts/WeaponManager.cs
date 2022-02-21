@@ -12,7 +12,6 @@ public class WeaponManager : MonoBehaviour
     public int currentWeaponIndex;
     private void Start()
     {
-
         hasWeapons = new bool[weapons.Length];
         enableWeapons = new bool[weapons.Length];
         // 테스트용
@@ -22,6 +21,7 @@ public class WeaponManager : MonoBehaviour
         enableWeapons[0] = true;
         currentWeapon = weapons[0];
         currentWeaponIndex = 0;
+        weapons[0].GetComponent<Weapon>().currentBullet = weapons[0].GetComponent<Weapon>().maxBullet;
     }
     void Update()
     {
@@ -38,8 +38,7 @@ public class WeaponManager : MonoBehaviour
         // 해당 웨폰의 장탄 수를 최대로 늘려주고, 만약 보유중이지 않았다면 hasWeapons를 true로 바꿔줘야 함.
         while (true)
         {
-            // 권총은 탄창 수가 제한이 없으므로 빼고 랜덤을 돌림.
-            int randomWeapon = Random.Range(0, enableWeapons.Length);
+            int randomWeapon = Random.Range(1, enableWeapons.Length);
             if (enableWeapons[randomWeapon])
             {
                 hasWeapons[randomWeapon] = true;
@@ -67,7 +66,7 @@ public class WeaponManager : MonoBehaviour
             hasWeapons[i] = true;
             enableWeapons[i] = true;
             weapons[i].GetComponent<Weapon>().currentBullet = weapons[i].GetComponent<Weapon>().maxBullet;
-            
+
         }
     }
     // 총 바꿔주는 함수
@@ -101,7 +100,7 @@ public class WeaponManager : MonoBehaviour
     {
         // 배열 0부터 시작하므로 빼줌
         int _index = _num - 1;
-        if(currentWeaponIndex != _index)
+        if (currentWeaponIndex != _index)
         {
             if (enableWeapons[_index])
             {
@@ -120,7 +119,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = weapons[_index];
         currentWeaponIndex = _index;
         currentWeapon.SetActive(true);
-    }    
+    }
 
     public void OutOfAmmo()
     {

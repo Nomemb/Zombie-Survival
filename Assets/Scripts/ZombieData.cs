@@ -20,5 +20,4 @@ public class ZombieData : ScriptableObject
     [SerializeField]
     private int zombieDropRate;
     public int ZombieDropRate { get { return zombieDropRate; } }
-
 }
