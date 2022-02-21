@@ -39,7 +39,10 @@ public class Weapon : MonoBehaviour
     {
         GameObject instantBullet = Instantiate(bulletPrefabs, bulletPos.position, playerController.transform.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-        currentBullet -= 1;
+        // 권총은 탄알이 무제한이기 때문에 예외처리함
+        if(weaponName != "Pistol")
+            currentBullet -= 1;
+
         bulletRigid.velocity = bulletPos.forward * 50;
         yield return new WaitForSeconds(weaponRange);
         Destroy(instantBullet);

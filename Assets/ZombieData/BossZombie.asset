@@ -17,3 +17,4 @@ MonoBehaviour:
   zombieDamage: 35
   zombieAttackSpeed: 0.3
   zombieDropRate: 100
+  zombiePoint: 1000

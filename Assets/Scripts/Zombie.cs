@@ -12,7 +12,7 @@ public class Zombie : MonoBehaviour
     public BoxCollider meleeArea;
     public GameObject bulletPrefabs;
 
-
+    private ScoreManager scoreManager;
 
     [SerializeField]
     private Transform target; // 쫓을 타겟 ( 플레이어 )
@@ -24,6 +24,7 @@ public class Zombie : MonoBehaviour
     public int zombieDamage;
     public float zombieAttackSpeed;
     public string zombieName;
+    public int zombiePoint;
     private Animator anim;
 
 
@@ -39,6 +40,7 @@ public class Zombie : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         item = FindObjectOfType<Item>();
+        scoreManager = GetComponentInParent<ScoreManager>();
 
         renderer = GetComponentsInChildren<Renderer>();
         zombieHP = zombieData.ZombieHP;
@@ -46,13 +48,19 @@ public class Zombie : MonoBehaviour
         zombieAttackSpeed = zombieData.ZombieAttackSpeed;
         zombieName = zombieData.ZombieName;
 
-        
-        if(zombieName == "Boss Zombie")
+
+
+        if (zombieName == "Boss Zombie")
         {
+            zombiePoint = 1000;
             foreach (Renderer mesh in renderer)
             {
                 mesh.material.color = Color.red;
             }            
+        }
+        else
+        {
+            zombiePoint = 100;
         }
         Invoke("ChaseStart", 0.5f);
     }
@@ -85,7 +93,7 @@ public class Zombie : MonoBehaviour
         else if(zombieName == "Boss Zombie")
         {
             targetRadius = 0.5f;
-            targetRange = 10f;
+            targetRange = 5f;
         }
 
 
@@ -122,7 +130,9 @@ public class Zombie : MonoBehaviour
             instantBullet.GetComponent<EnemyBullet>().bulletDamage = zombieDamage;
             Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
             // 플레이어 방향으로 던지게 수정할 예정
-            rigidBullet.velocity = transform.forward * 5;
+            Vector3 velo = new Vector3(target.position.x - transform.position.x, 0, target.position.z - transform.position.z);
+
+            rigidBullet.velocity = velo.normalized * 5;
 
             yield return new WaitForSeconds(zombieAttackSpeed);
         }
@@ -167,7 +177,7 @@ public class Zombie : MonoBehaviour
                 nav.isStopped = true;
                 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
                 // sniper총은 관통탄으로 처리
-                if (other.GetComponent<Bullet>().currentGunInfo.GetComponent<Weapon>().weaponName != "Sniper")
+                if (other.GetComponent<Bullet>().weaponName != "Sniper")
                 {
                     Destroy(other.gameObject);
                 }
@@ -196,7 +206,7 @@ public class Zombie : MonoBehaviour
             rigidbody.AddForce(reactVec * 10, ForceMode.Impulse);
 
             // 잠깐 경직 후 추적 재개
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             nav.isStopped = false;
 
             yield return null;
@@ -208,9 +218,12 @@ public class Zombie : MonoBehaviour
             anim.SetTrigger("death");
             rigidbody.useGravity = false;
             boxCollider.enabled = false;
-            yield return new WaitForSeconds(2.5f);
+            // 스코어 증가            
+            scoreManager.IncreaseScore(zombiePoint);
             // 아이템드롭
             item.DropItem(transform.position, zombieData.ZombieDropRate);
+            yield return new WaitForSeconds(2.5f);           
+
             Destroy(gameObject);
         }
 

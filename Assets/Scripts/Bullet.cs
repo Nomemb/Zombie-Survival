@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public string weaponName;
     public int bulletDamage;
 
     private WeaponManager weaponManager;
-    public GameObject currentGunInfo;
+    
     private void Start()
     {
         weaponManager = FindObjectOfType<WeaponManager>();
     }
     private void Update()
     {
-        currentGunInfo = weaponManager.weapons[weaponManager.currentWeaponIndex];
-        bulletDamage = currentGunInfo.GetComponent<Weapon>().weaponDamage;
+        bulletDamage = weaponManager.weapons[weaponManager.currentWeaponIndex].GetComponent<Weapon>().weaponDamage;
+        weaponName = weaponManager.weapons[weaponManager.currentWeaponIndex].GetComponent<Weapon>().weaponName;
     }
     private void OnCollisionEnter(Collision collision)
     {

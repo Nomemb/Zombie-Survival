@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     private float fireDelay; // 총 재사격 가능 시간
     private bool isFireDelay;
     private bool isBorder;
-    private bool isDamage;
+    public bool isDamage;
+    public bool isDie;
 
     Animator anim;
     // Start is called before the first frame update
@@ -35,8 +36,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Shoot();
+        if (!isDie)
+        {
+            Move();
+            Shoot();
+
+        }
     }
 
     private void Move()
@@ -89,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyBullet"))
+        if (other.CompareTag("EnemyBullet") || other.CompareTag("BossBullet"))
         {
 
             if (!isDamage)
@@ -100,15 +105,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(OnDamage(reactVec));
             }
         }
-        else if (other.CompareTag("BossBullet"))
+        if (other.CompareTag("BossBullet"))
         {
-            if (!isDamage)
-            {
-                playerHP.CurrentHP -= other.GetComponent<EnemyBullet>().bulletDamage;
-                Vector3 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
-
-                StartCoroutine(OnDamage(reactVec));
-            }
             if (other.GetComponent<Rigidbody>() != null)
             {
                 Destroy(other.gameObject);
@@ -118,14 +116,27 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        isDamage = true;
-        
+        if(playerHP.CurrentHP > 0)
+        {
+            isDamage = true;
 
-        myRigid.AddForce(reactVec * 10, ForceMode.Impulse);
-        yield return new WaitForSeconds(0.5f);
+            myRigid.AddForce(reactVec * 10, ForceMode.Impulse);
+            yield return new WaitForSeconds(0.5f);
 
-        isDamage = false;
-        
+            isDamage = false;
+        }
+        else
+        {
+            isDie = true;
+            anim.SetTrigger("Die");
+            myRigid.useGravity = false;
+            capsuleCollider.enabled = false;
+            yield return new WaitForSeconds(2.5f);
+            // 퍼즈
+            Time.timeScale = 0;
+        }
+
+
         yield return null;
     }
 }
