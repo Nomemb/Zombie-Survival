@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\UI\ComboTextManager.cs" />
     <Compile Include="Assets\Scripts\UI\HPBarScript.cs" />
     <Compile Include="Assets\Scripts\UI\ScoreManager.cs" />
-    <Compile Include="Assets\Scripts\UI\ScoreTextManager.cs" />
     <Compile Include="Assets\Scripts\UI\TextManager.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
