@@ -30,6 +30,7 @@ public class Zombie : MonoBehaviour
 
     private bool isChase;
     private bool isAttack;
+    private bool isDamage;
     private bool isDie;
 
     private Renderer[] renderer;
@@ -41,16 +42,15 @@ public class Zombie : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         item = FindObjectOfType<Item>();
-        scoreManager = GetComponentInParent<ScoreManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
 
         renderer = GetComponentsInChildren<Renderer>();
         zombieHP = zombieData.ZombieHP;
         zombieDamage = zombieData.ZombieDamage;
         zombieAttackSpeed = zombieData.ZombieAttackSpeed;
         zombieName = zombieData.ZombieName;
-
-
-
+               
+        // 보스 좀비 색 변경
         if (zombieName == "Boss Zombie")
         {
             zombiePoint = 1000;
@@ -66,19 +66,47 @@ public class Zombie : MonoBehaviour
         Invoke("ChaseStart", 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isChase || !isDie)
-        {
-            nav.SetDestination(target.position);
-            anim.SetBool("isChase", isChase);
-
-        }
-    }
     private void ChaseStart()
     {
         isChase = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (isChase && !isDie && !isDamage)
+        {
+            nav.SetDestination(target.position);
+            anim.SetBool("isChase", isChase);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isDie)
+        {
+            FreezeVelocity();
+            FreezeRotation();
+            // 피격당했을 경우 공격 불가
+            if (!isDamage)
+            {
+                Targeting();
+            }
+        }
+    }
+
+    private void FreezeVelocity()
+    {
+        if (isChase)
+        {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+
+        }
+    }
+    private void FreezeRotation()
+    {
+        rigidbody.angularVelocity = Vector3.zero;
     }
 
     private void Targeting()
@@ -96,8 +124,7 @@ public class Zombie : MonoBehaviour
             targetRadius = 0.5f;
             targetRange = 5f;
         }
-
-
+        
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
         if(rayHits.Length > 0 && !isAttack)
@@ -112,7 +139,6 @@ public class Zombie : MonoBehaviour
         isAttack = true;
         nav.isStopped = true;
         anim.SetBool("isAttack", isAttack);
-
 
         if (zombieName == "Normal Zombie")
         {
@@ -138,42 +164,18 @@ public class Zombie : MonoBehaviour
             yield return new WaitForSeconds(zombieAttackSpeed);
         }
 
-
         isChase = true;
         isAttack = false;
         nav.isStopped = false;
         anim.SetBool("isAttack", isAttack);
-    }
-    private void FixedUpdate()
-    {
-        if (!isDie)
-        {
-            FreezeVelocity();
-            FreezeRotation();
-            Targeting();
-        }
-
-    }
-    private void FreezeVelocity()
-    {
-        if (isChase)
-        {
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-
-        }
-    }
-
-    private void FreezeRotation()
-    {
-        rigidbody.angularVelocity = Vector3.zero;
-    }
-
+    } 
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("playerBullet") || other.CompareTag("BossBullet"))
+        if (!isDie && (other.CompareTag("playerBullet") || other.CompareTag("BossBullet")))
         {
             Vector3 reactVec = Vector3.zero;
+            isDamage = true;
             if (other.CompareTag("playerBullet"))
             {
                 Bullet bullet = other.GetComponent<Bullet>();
@@ -193,10 +195,7 @@ public class Zombie : MonoBehaviour
                 Destroy(other.gameObject);
 
             }
-
-
             StartCoroutine(OnDamage(reactVec));
-
         }
     }
 
@@ -214,8 +213,9 @@ public class Zombie : MonoBehaviour
             rigidbody.AddForce(reactVec * 10, ForceMode.Impulse);
 
             // 잠깐 경직 후 추적 재개
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
             nav.isStopped = false;
+            isDamage = false;
 
             yield return null;
         }
