@@ -30,6 +30,7 @@ public class Zombie : MonoBehaviour
 
     private bool isChase;
     private bool isAttack;
+    private bool isDie;
 
     private Renderer[] renderer;
     // Start is called before the first frame update
@@ -68,7 +69,7 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isChase)
+        if (isChase || !isDie)
         {
             nav.SetDestination(target.position);
             anim.SetBool("isChase", isChase);
@@ -116,12 +117,12 @@ public class Zombie : MonoBehaviour
         if (zombieName == "Normal Zombie")
         {
             yield return new WaitForSeconds(0.5f);
-
             meleeArea.enabled = true;
 
 
             yield return new WaitForSeconds(zombieAttackSpeed);
             meleeArea.enabled = false;
+
         }
         else if (zombieName == "Boss Zombie")
         {
@@ -145,9 +146,13 @@ public class Zombie : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        FreezeVelocity();
-        FreezeRotation();
-        Targeting();
+        if (!isDie)
+        {
+            FreezeVelocity();
+            FreezeRotation();
+            Targeting();
+        }
+
     }
     private void FreezeVelocity()
     {
@@ -173,8 +178,6 @@ public class Zombie : MonoBehaviour
             {
                 Bullet bullet = other.GetComponent<Bullet>();
                 zombieHP -= bullet.bulletDamage;
-
-                nav.isStopped = true;
                 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
                 // sniper총은 관통탄으로 처리
                 if (other.GetComponent<Bullet>().weaponName != "Sniper")
@@ -185,8 +188,7 @@ public class Zombie : MonoBehaviour
             else
             {
                 EnemyBullet bullet = other.GetComponent<EnemyBullet>();
-                zombieHP -= bullet.bulletDamage;
-                nav.isStopped = true;
+                zombieHP -= (bullet.bulletDamage / 2);
                 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
                 Destroy(other.gameObject);
 
@@ -200,13 +202,19 @@ public class Zombie : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
+        nav.isStopped = true;
+        StopCoroutine(AttackCoroutine());
+        isChase = true;
+        isAttack = false;
+        anim.SetBool("isAttack", isAttack);
+
         if (zombieHP > 0)
         {
             reactVec = reactVec.normalized;
             rigidbody.AddForce(reactVec * 10, ForceMode.Impulse);
 
             // 잠깐 경직 후 추적 재개
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             nav.isStopped = false;
 
             yield return null;
@@ -214,7 +222,9 @@ public class Zombie : MonoBehaviour
         else
         {
             // 사망처리
+            isDie = true;
             nav.isStopped = true;
+
             anim.SetTrigger("death");
             rigidbody.useGravity = false;
             boxCollider.enabled = false;

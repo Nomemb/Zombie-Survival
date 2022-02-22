@@ -12,12 +12,6 @@ public class ScoreManager : MonoBehaviour
         comboManager = FindObjectOfType<ComboManager>();
     }
 
-    private void Update()
-    {        
-        //if(좀비 처치시)
-        // IncreaseScore(ZombieType.score);
-    }
-
     // 좀비 처치시 실행
     public void IncreaseScore(int _score)
     {

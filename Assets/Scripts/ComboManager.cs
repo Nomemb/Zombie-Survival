@@ -15,23 +15,28 @@ public class ComboManager : MonoBehaviour
         }
     }
 
-    // 콤보 지속시간 안에 새로 몬스터를 처치하지 못하면 콤보 초기화
-    public void IncreaseCombo()
+    private void Update()
     {
-        currentCombo += 1;
-        comboDurationTime = 0;
-        if(currentCombo > 2)
+        if (currentCombo > 1)
         {
-            comboResetTime += Time.deltaTime;
-            if(comboDurationTime > comboResetTime)
+            comboDurationTime += Time.deltaTime;
+            if (comboDurationTime > comboResetTime)
             {
-                ResetCombo();
+                DecreaseCombo();
             }
         }
     }
-
-    public void ResetCombo()
+    // 콤보 지속시간 안에 새로 몬스터를 처치하지 못하면 콤보 감소
+    public void IncreaseCombo()
     {
-        currentCombo = 1;
+        currentCombo += 1;
+        comboDurationTime = 0;        
+    }
+
+    public void DecreaseCombo()
+    {
+        currentCombo -= 1;
+        comboDurationTime = 0;
+
     }
 }

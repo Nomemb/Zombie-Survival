@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ComboTextManager.cs" />
     <Compile Include="Assets\Scripts\UI\HPBarScript.cs" />
     <Compile Include="Assets\Scripts\UI\ScoreTextManager.cs" />
     <Compile Include="Assets\Scripts\UI\TextManager.cs" />
