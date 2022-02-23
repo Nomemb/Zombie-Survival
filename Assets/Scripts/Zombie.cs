@@ -14,9 +14,9 @@ public class Zombie : MonoBehaviour
 
     private ScoreManager scoreManager;
 
-    [SerializeField]
-    private Transform target; // 쫓을 타겟 ( 플레이어 )
+    public Transform target; // 쫓을 타겟 ( 플레이어 )
 
+    private StageManager stageManager;
     private Item item;
     
     private NavMeshAgent nav;
@@ -43,6 +43,7 @@ public class Zombie : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         item = FindObjectOfType<Item>();
         scoreManager = FindObjectOfType<ScoreManager>();
+        stageManager = FindObjectOfType<StageManager>();
 
         renderer = GetComponentsInChildren<Renderer>();
         zombieHP = zombieData.ZombieHP;
@@ -63,11 +64,6 @@ public class Zombie : MonoBehaviour
         {
             zombiePoint = 100;
         }
-        Invoke("ChaseStart", 0.5f);
-    }
-
-    private void ChaseStart()
-    {
         isChase = true;
     }
 
@@ -83,16 +79,20 @@ public class Zombie : MonoBehaviour
 
     private void FixedUpdate()
     {
+        FreezeVelocity();
+        FreezeRotation();
         if (!isDie)
         {
-            FreezeVelocity();
-            FreezeRotation();
-            // 피격당했을 경우 공격 불가
             if (!isDamage)
             {
                 Targeting();
             }
         }
+        else
+        {
+            nav.isStopped = true;
+        }
+
     }
 
     private void FreezeVelocity()
@@ -223,20 +223,29 @@ public class Zombie : MonoBehaviour
         {
             // 사망처리
             isDie = true;
+            StartCoroutine(OnDie());
+        }
+        yield return null;
+    }
+    IEnumerator OnDie()
+    {
+        if (isDie)
+        {
             nav.isStopped = true;
-
+            isChase = false;
+            isAttack = false;
             anim.SetTrigger("death");
             rigidbody.useGravity = false;
             boxCollider.enabled = false;
+            stageManager.zombieCount--;
             // 스코어 증가            
             scoreManager.IncreaseScore(zombiePoint);
             // 아이템드롭
             item.DropItem(transform.position, zombieData.ZombieDropRate);
-            yield return new WaitForSeconds(2.5f);           
-
+            yield return new WaitForSeconds(2.5f);
             Destroy(gameObject);
         }
-
+ 
         yield return null;
     }
 }

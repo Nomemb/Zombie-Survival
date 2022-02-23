@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
+    <Compile Include="Assets\Scripts\StageManager.cs" />
     <Compile Include="Assets\Scripts\UI\CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\ComboManager.cs" />
     <Compile Include="Assets\Scripts\UI\ComboTextManager.cs" />

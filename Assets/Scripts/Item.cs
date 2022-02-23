@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     private int gunDropRate;
 
     public GameObject itemPrefab;
+    private GameObject instantItem;
     private Rigidbody myRigid;
     private Vector3 startPos;
     private bool direction;
@@ -99,7 +100,7 @@ public class Item : MonoBehaviour
         int rand = Random.Range(0, 100);
         if(_dropRate > rand)
         {
-            GameObject newItem = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
+            instantItem = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
         }
     }
 }
