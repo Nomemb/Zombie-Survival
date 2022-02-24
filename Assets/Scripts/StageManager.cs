@@ -62,7 +62,7 @@ public class StageManager : MonoBehaviour
             zombie.target = player.transform;
             zombieList.RemoveAt(0);
 
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(1f);
         }
 
         while (zombieCount > 0)

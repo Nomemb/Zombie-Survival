@@ -431,9 +431,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.9579804, y: 0.32954323, z: -1.0679243}
+    m_Target: {x: 11.595062, y: 5.8120146, z: 12.96334}
     speed: 2
-    m_Value: {x: -2.9579804, y: 0.32954323, z: -1.0679243}
+    m_Value: {x: 11.595062, y: 5.8120146, z: 12.96334}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -483,9 +483,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.19681731, y: 0.6347407, z: -0.17178725, w: -0.72722524}
   m_Size:
-    m_Target: 6.179424
+    m_Target: 3.238708
     speed: 2
-    m_Value: 6.179424
+    m_Value: 3.238708
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 14272
+  m_LastSelectedObjectID: 14066
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -752,20 +752,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: de370000
-      m_LastClickedID: 14302
-      m_ExpandedIDs: 8cfaffff92faffffa6faffffb6faffffb8faffffc4faffffcafaffffd4faffff66fbffff06370000de370000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 8cfaffff92faffffa6faffffb6faffffb8faffffc4faffffcafaffffd4faffff66fbfffff83600000637000044370000de370000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Zombie(Clone)
-        m_OriginalName: Zombie(Clone)
+        m_Name: Missile(Clone)
+        m_OriginalName: Missile(Clone)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -14952
+        m_UserData: -37174
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0

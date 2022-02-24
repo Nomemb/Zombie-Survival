@@ -541,7 +541,7 @@ PrefabInstance:
     - target: {fileID: 3647109984937722758, guid: 70c48be8697ff6140812ee8d2eccd1ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.11
+      value: -5.56
       objectReference: {fileID: 0}
     - target: {fileID: 3647109984937722758, guid: 70c48be8697ff6140812ee8d2eccd1ef,
         type: 3}
@@ -1312,7 +1312,7 @@ PrefabInstance:
     - target: {fileID: 3647109984937722758, guid: 70c48be8697ff6140812ee8d2eccd1ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.81
+      value: 13.43
       objectReference: {fileID: 0}
     - target: {fileID: 3647109984937722758, guid: 70c48be8697ff6140812ee8d2eccd1ef,
         type: 3}
@@ -2487,9 +2487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2662eec0ccc030a46add3a33303ec092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: 1
+  stage: 0
   zombieCount: 0
-  normalZombieSpawnRate: 70
+  normalZombieSpawnRate: 80
   spawnZones:
   - {fileID: 1610552290}
   - {fileID: 1151293452}

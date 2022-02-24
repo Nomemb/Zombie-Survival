@@ -49,7 +49,8 @@ public class Zombie : MonoBehaviour
         stageManager = FindObjectOfType<StageManager>();
 
         renderer = GetComponentsInChildren<Renderer>();
-        zombieHP = zombieData.ZombieHP;
+        // 스테이지별로 좀비 체력 증가
+        zombieHP = zombieData.ZombieHP + (int)(zombieData.ZombieHP * (stageManager.stage - 1) * 0.02);
         zombieDamage = zombieData.ZombieDamage;
         zombieAttackSpeed = zombieData.ZombieAttackSpeed;
         zombieName = zombieData.ZombieName;
@@ -165,7 +166,7 @@ public class Zombie : MonoBehaviour
 
             rigidBullet.velocity = velo.normalized * 5;
 
-            yield return new WaitForSeconds(zombieAttackSpeed);
+            yield return new WaitForSeconds(zombieAttackSpeed);           
         }
 
         isChase = true;

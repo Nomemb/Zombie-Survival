@@ -13,6 +13,10 @@ public class EnemyBullet : MonoBehaviour
         {
             bulletDamage = FindObjectOfType<Zombie>().zombieDamage;
         }
+        if (!isMelee)
+        {
+            Destroy(gameObject, 5f);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
