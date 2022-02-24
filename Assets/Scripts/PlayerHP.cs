@@ -31,7 +31,6 @@ public class PlayerHP : MonoBehaviour
     private float perfectGameTime;
 
     private PlayerController playerController;
-    public bool isDamage;
 
     void Start()
     {

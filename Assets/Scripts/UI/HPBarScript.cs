@@ -28,6 +28,6 @@ public class HPBarScript : MonoBehaviour
     void FixedUpdate()
     {
         playerHPBar.value = (float)playerHP.CurrentHP / playerHP.MaxHP;
-        playerHPBar.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 0, 1));
+        playerHPBar.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 1, 1));
     }
 }

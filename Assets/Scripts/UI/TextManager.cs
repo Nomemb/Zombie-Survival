@@ -36,13 +36,13 @@ public class TextManager : MonoBehaviour
         if(currentWeapon.weaponName == "Pistol")
         {
             currentWeaponInfo.text = string.Format("{0}", currentWeapon.weaponName);
-            currentWeaponInfo.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 0, 1.4f));
+            currentWeaponInfo.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 1, 1.4f));
 
         }
         else
         {
             currentWeaponInfo.text = string.Format("{0} : {1}", currentWeapon.weaponName, currentWeapon.currentBullet);
-            currentWeaponInfo.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 0, 1.4f));
+            currentWeaponInfo.transform.position = cam.WorldToScreenPoint(player.transform.position + new Vector3(0, 1, 1.4f));
 
         }
     }

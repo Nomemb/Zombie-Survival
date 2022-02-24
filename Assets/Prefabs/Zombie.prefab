@@ -1070,8 +1070,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3789686513934913449}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 5.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3789686513934684781}
@@ -1079,7 +1079,7 @@ Transform:
   - {fileID: 1022640249}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3789686513944280463
 Animator:
   serializedVersion: 3
@@ -1130,11 +1130,14 @@ MonoBehaviour:
   zombieData: {fileID: 11400000, guid: 06d25e1e1a8853b4786101e929f28040, type: 2}
   meleeArea: {fileID: 1022640251}
   bulletPrefabs: {fileID: 0}
+  itemPrefab: {fileID: 666617369670705774, guid: c0e614dbdce83bd43a4330abb3bbf053,
+    type: 3}
   target: {fileID: 0}
   zombieHP: 0
   zombieDamage: 0
   zombieAttackSpeed: 0
   zombieName: 
+  zombiePoint: 0
 --- !u!195 &4572536120479451610
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1148,7 +1151,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 90
+  m_AngularSpeed: 45
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

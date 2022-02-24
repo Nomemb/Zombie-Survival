@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: BossZombie
   m_EditorClassIdentifier: 
   zombieName: Boss Zombie
-  zombieHP: 400
+  zombieHP: 250
   zombieDamage: 35
   zombieAttackSpeed: 0.3
   zombieDropRate: 100
-  zombiePoint: 1000
