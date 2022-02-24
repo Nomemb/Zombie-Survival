@@ -5,8 +5,10 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     private GameObject instantZombie;
-
+    private TextInfoManager info;
     private PlayerController player;
+
+    private string _info;
     public int stage;
     public int zombieCount;
     public enum ZombieType { Normal = 0, Boss }
@@ -21,7 +23,9 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         zombieList = new List<int>();
+        info = FindObjectOfType<TextInfoManager>();
         player = FindObjectOfType<PlayerController>();
+
     }
 
     // Update is called once per frame
@@ -36,8 +40,10 @@ public class StageManager : MonoBehaviour
     private void ClearStage()
     {
         isClearStage = true;
-        // 남아있는 좀비가 0마리면 클리어 문구를 띄우고
-        Debug.Log("Stage " + stage + " Clear!");
+        if (stage != 0)
+        {
+            info.AddInfo("Stage " + stage + " Clear!");
+        }
         StartCoroutine(NextStageCoroutine());
 
     }
@@ -46,6 +52,8 @@ public class StageManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         // 대기 후 좀비 스폰
         stage += 1;
+        info.AddInfo("====Stage " + stage + "====");
+
         for (int i = 0; i < stage * 10; i++)
         {
             int random = Random.Range(0, 100);

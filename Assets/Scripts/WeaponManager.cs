@@ -10,6 +10,8 @@ public class WeaponManager : MonoBehaviour
 
     private GameObject currentWeapon;
     public int currentWeaponIndex;
+
+    private TextInfoManager info;
     private void Start()
     {
         hasWeapons = new bool[weapons.Length];
@@ -22,12 +24,11 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = weapons[0];
         currentWeaponIndex = 0;
         weapons[0].GetComponent<Weapon>().currentBullet = weapons[0].GetComponent<Weapon>().maxBullet;
+        info = FindObjectOfType<TextInfoManager>();
     }
     void Update()
     {
         EnableWeaponUpdate();
-
-
         Swap();
     }
 
@@ -43,7 +44,7 @@ public class WeaponManager : MonoBehaviour
             {
                 hasWeapons[randomWeapon] = true;
                 weapons[randomWeapon].GetComponent<Weapon>().currentBullet = weapons[randomWeapon].GetComponent<Weapon>().maxBullet;
-                Debug.Log(weapons[randomWeapon].GetComponent<Weapon>().weaponName + " 을 획득했습니다!");
+                info.AddInfo(weapons[randomWeapon].GetComponent<Weapon>().weaponName + " 을 획득했습니다!");
                 return;
             }
 

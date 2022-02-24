@@ -59,6 +59,8 @@ public class Zombie : MonoBehaviour
         if (zombieName == "Boss Zombie")
         {
             zombiePoint = 1000;
+            // 5스테이지마다 2씩 증가
+            zombieDamage = zombieData.ZombieDamage + (stageManager.stage / 5) * 2;
             foreach (Renderer mesh in renderer)
             {
                 mesh.material.color = Color.red;

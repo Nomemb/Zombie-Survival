@@ -17,11 +17,13 @@ public class Weapon : MonoBehaviour
 
     private PlayerController playerController;
     private WeaponManager weaponManager;
+    private TextInfoManager info;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
         weaponManager = GetComponentInParent<WeaponManager>();
+        info = FindObjectOfType<TextInfoManager>();
 
     }
     public void Shoot()
@@ -77,7 +79,7 @@ public class Weapon : MonoBehaviour
 
     private void OutOfAmmo()
     {
-        Debug.Log(weaponName + " is Out of Ammo!");
+        info.AddInfo(weaponName + " 의 탄약 고갈.");
         weaponManager.OutOfAmmo();
 
     }

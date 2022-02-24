@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum ItemType { HP, Gun };
-
     [SerializeField]
     private int gunDropRate;
 
     public GameObject itemPrefab;
     private GameObject instantItem;
+
     private Rigidbody myRigid;
     private Vector3 startPos;
     private bool direction;
+
+    private TextInfoManager info;
     private WeaponManager weaponManager;
     private PlayerHP playerHP;
     [SerializeField]
@@ -23,6 +24,7 @@ public class Item : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
         playerHP = FindObjectOfType<PlayerHP>();
         startPos = transform.position;
+        info = FindObjectOfType<TextInfoManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
 
     }
@@ -56,8 +58,7 @@ public class Item : MonoBehaviour
         // 아직 아무 총도 해금되지 않았다면 체력만 회복
         if(weaponManager.enableWeapons[1] == false)
         {
-            Debug.Log("HP를 회복했습니다!");
-
+            info.AddInfo("HP를 회복했습니다!");
             GetHPItem();
         }
         else
@@ -71,8 +72,7 @@ public class Item : MonoBehaviour
             // 그 이외의 경우에는 HP가 드롭
             else
             {
-                Debug.Log("HP를 회복했습니다!");
-
+                info.AddInfo("HP를 회복했습니다!");
                 GetHPItem();
             }
         }
@@ -83,7 +83,6 @@ public class Item : MonoBehaviour
     private void GetHPItem()
     {
         playerHP.CurrentHP = playerHP.MaxHP;
-
     }
 
     private void OnTriggerEnter(Collider other)
