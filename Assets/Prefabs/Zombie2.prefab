@@ -1091,6 +1091,8 @@ MonoBehaviour:
   meleeArea: {fileID: 0}
   bulletPrefabs: {fileID: 1988757171818786752, guid: 53b80aea4c436ad4393b1b972ba1c5fb,
     type: 3}
+  itemPrefab: {fileID: 666617369670705774, guid: c0e614dbdce83bd43a4330abb3bbf053,
+    type: 3}
   target: {fileID: 0}
   zombieHP: 0
   zombieDamage: 0

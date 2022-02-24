@@ -69,5 +69,6 @@ public class StageManager : MonoBehaviour
         {
             yield return null;
         }
+        ClearStage();
     }
 }

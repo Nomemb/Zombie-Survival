@@ -95,7 +95,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void DropItem(Vector3 _position, int _dropRate)
+    public void DropItem(GameObject itemPrefab, Vector3 _position, int _dropRate)
     {
         int rand = Random.Range(0, 100);
         if(_dropRate > rand)

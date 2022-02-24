@@ -11,6 +11,8 @@ public class Zombie : MonoBehaviour
     private BoxCollider boxCollider;
     public BoxCollider meleeArea;
     public GameObject bulletPrefabs;
+    public GameObject itemPrefab;
+
 
     private ScoreManager scoreManager;
 
@@ -32,6 +34,7 @@ public class Zombie : MonoBehaviour
     private bool isAttack;
     private bool isDamage;
     private bool isDie;
+
 
     private Renderer[] renderer;
     // Start is called before the first frame update
@@ -91,6 +94,7 @@ public class Zombie : MonoBehaviour
         else
         {
             nav.isStopped = true;
+
         }
 
     }
@@ -230,7 +234,11 @@ public class Zombie : MonoBehaviour
     IEnumerator OnDie()
     {
         if (isDie)
-        {
+        {            
+            // 스코어 증가            
+            scoreManager.IncreaseScore(zombiePoint);
+            // 아이템드롭
+            item.DropItem(itemPrefab, transform.position, zombieData.ZombieDropRate);
             nav.isStopped = true;
             isChase = false;
             isAttack = false;
@@ -238,12 +246,9 @@ public class Zombie : MonoBehaviour
             rigidbody.useGravity = false;
             boxCollider.enabled = false;
             stageManager.zombieCount--;
-            // 스코어 증가            
-            scoreManager.IncreaseScore(zombiePoint);
-            // 아이템드롭
-            item.DropItem(transform.position, zombieData.ZombieDropRate);
+
             yield return new WaitForSeconds(2.5f);
-            Destroy(gameObject);
+            Destroy(gameObject,3f);
         }
  
         yield return null;

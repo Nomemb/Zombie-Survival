@@ -1130,6 +1130,8 @@ MonoBehaviour:
   zombieData: {fileID: 11400000, guid: 06d25e1e1a8853b4786101e929f28040, type: 2}
   meleeArea: {fileID: 1022640251}
   bulletPrefabs: {fileID: 0}
+  itemPrefab: {fileID: 666617369670705774, guid: c0e614dbdce83bd43a4330abb3bbf053,
+    type: 3}
   target: {fileID: 0}
   zombieHP: 0
   zombieDamage: 0
