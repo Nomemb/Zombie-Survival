@@ -17,12 +17,15 @@ public class Item : MonoBehaviour
     private TextInfoManager info;
     private WeaponManager weaponManager;
     private PlayerHP playerHP;
+    private AudioSource audio;
     [SerializeField]
     private Vector3 destinationPos;
     private void Start()
     {
-        myRigid = GetComponent<Rigidbody>();
+        myRigid = GetComponent<Rigidbody>();        
         playerHP = FindObjectOfType<PlayerHP>();
+        audio = GetComponent<AudioSource>();
+
         startPos = transform.position;
         info = FindObjectOfType<TextInfoManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
@@ -89,6 +92,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            audio.Play();
             GetItem();
             Destroy(this.gameObject);
         }

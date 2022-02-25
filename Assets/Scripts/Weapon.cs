@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public float weaponRange; // 총알이 살아있는 시간( 사거리 )
     public int maxBullet; // 최대 장탄수
     public int currentBullet;
+    public AudioClip gunSound;
 
     public Transform bulletPos;
     public GameObject bulletPrefabs;
@@ -42,6 +43,7 @@ public class Weapon : MonoBehaviour
         // 권총은 탄알이 무제한이기 때문에 예외처리함
         if (weaponName != "Pistol")
             currentBullet -= 1;
+
 
         if (weaponName != "Shotgun")
         {

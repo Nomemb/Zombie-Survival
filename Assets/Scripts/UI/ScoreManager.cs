@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     private ComboManager comboManager;
-    public int currentScore;
+    public int currentScore = 0;
     public Text scoreTxt;
 
 
     private Animator anim;
     private void Start()
     {
-        currentScore = 0;
         comboManager = FindObjectOfType<ComboManager>();
         anim = GetComponent<Animator>();
     }

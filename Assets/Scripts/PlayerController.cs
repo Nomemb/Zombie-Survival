@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private PlayerHP playerHP;
     private Item item;
     private WeaponManager weaponManager;
+    private StageManager stage;
+    private AudioSource audio;
     private Weapon currentWeapon;
     private float fireDelay; // 총 재사격 가능 시간
     private bool isFireDelay;
@@ -29,8 +31,11 @@ public class PlayerController : MonoBehaviour
         playerHP = GetComponent<PlayerHP>();
         item = GetComponent<Item>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
+        audio.volume = 0.5f;
 
         weaponManager = FindObjectOfType<WeaponManager>();
+        stage = FindObjectOfType<StageManager>();
     }
 
     // Update is called once per frame
@@ -72,20 +77,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && isFireDelay)
         {
             anim.SetTrigger("Shoot");
+            audio.clip = currentWeapon.gunSound;
+            audio.Play();
             currentWeapon.Shoot();
             fireDelay = 0;
         }
-        
+
     }
 
     private void FreezeRotation()
     {
         myRigid.angularVelocity = Vector3.zero;
     }
+
     private void WallCheck()
     {
         isBorder = Physics.Raycast(transform.position, transform.forward, 1.5f, LayerMask.GetMask("Wall"));
     }
+
     private void FixedUpdate()
     {
         FreezeRotation();
@@ -115,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        if(playerHP.CurrentHP > 0)
+        if (playerHP.CurrentHP > 0)
         {
             isDamage = true;
 
@@ -126,16 +135,19 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            isDie = true;
-            anim.SetTrigger("Die");
-            myRigid.useGravity = false;
-            capsuleCollider.enabled = false;
-            yield return new WaitForSeconds(2.5f);
-            // 퍼즈
-            Time.timeScale = 0;
+            StartCoroutine(OnDie());
         }
-
-
         yield return null;
+    }
+
+    IEnumerator OnDie()
+    {
+        isDie = true;
+        anim.SetTrigger("Die");
+        myRigid.useGravity = false;
+        capsuleCollider.enabled = false;
+        yield return new WaitForSeconds(2.5f);
+        // 퍼즈
+        stage.GameOver();
     }
 }

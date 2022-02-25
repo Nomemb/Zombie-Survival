@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class StageManager : MonoBehaviour
 {
@@ -12,13 +14,20 @@ public class StageManager : MonoBehaviour
     public int stage;
     public int zombieCount;
     public enum ZombieType { Normal = 0, Boss }
+
     [SerializeField]
     private int normalZombieSpawnRate;
     private bool isClearStage;
+
     [SerializeField]
     private Transform[] spawnZones;
     public GameObject[] zombies;
     private List<int> zombieList;
+
+    [SerializeField]
+    private GameObject mainPanel;
+    [SerializeField]
+    private GameObject gameOverPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,4 +88,18 @@ public class StageManager : MonoBehaviour
         }
         ClearStage();
     }
+
+    public void GameOver()
+    {
+        int _currentScore = mainPanel.GetComponentInChildren<ScoreManager>().currentScore;
+        mainPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+        gameOverPanel.GetComponentInChildren<ScoreManager>().currentScore = _currentScore;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }

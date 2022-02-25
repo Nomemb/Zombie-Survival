@@ -20,13 +20,15 @@ public class Zombie : MonoBehaviour
 
     private StageManager stageManager;
     private Item item;
-    
+
     private NavMeshAgent nav;
     public int zombieHP;
     public int zombieDamage;
     public float zombieAttackSpeed;
     public string zombieName;
     public int zombieScore;
+
+    private AudioSource audio;
     private Animator anim;
 
 
@@ -43,7 +45,9 @@ public class Zombie : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
         nav = GetComponent<NavMeshAgent>();
+        
         item = FindObjectOfType<Item>();
         scoreManager = FindObjectOfType<ScoreManager>();
         stageManager = FindObjectOfType<StageManager>();
@@ -54,7 +58,7 @@ public class Zombie : MonoBehaviour
         zombieDamage = zombieData.ZombieDamage;
         zombieAttackSpeed = zombieData.ZombieAttackSpeed;
         zombieName = zombieData.ZombieName;
-               
+
         // 보스 좀비 색 변경
         if (zombieName == "Boss Zombie")
         {
@@ -64,13 +68,19 @@ public class Zombie : MonoBehaviour
             foreach (Renderer mesh in renderer)
             {
                 mesh.material.color = Color.red;
-            }            
+            }
         }
         else
         {
             zombieScore = 100;
         }
         isChase = true;
+
+        int randSound = Random.Range(0, 100);
+        if (randSound >= 92)
+        {
+            audio.Play();
+        }
     }
 
     // Update is called once per frame
@@ -80,6 +90,7 @@ public class Zombie : MonoBehaviour
         {
             nav.SetDestination(target.position);
             anim.SetBool("isChase", isChase);
+
         }
     }
 
@@ -121,20 +132,21 @@ public class Zombie : MonoBehaviour
         float targetRadius = 0f;
         float targetRange = 0f;
 
-        if(zombieName == "Normal Zombie")
+        if (zombieName == "Normal Zombie")
         {
             targetRadius = 0.7f;
             targetRange = 0.3f;
         }
-        else if(zombieName == "Boss Zombie")
+        else if (zombieName == "Boss Zombie")
         {
             targetRadius = 1f;
             targetRange = 6f;
         }
         
+
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-        if(rayHits.Length > 0 && !isAttack)
+        if (rayHits.Length > 0 && !isAttack)
         {
             StartCoroutine(AttackCoroutine());
         }
@@ -146,6 +158,8 @@ public class Zombie : MonoBehaviour
         isAttack = true;
         nav.isStopped = true;
         anim.SetBool("isAttack", isAttack);
+
+
 
         if (zombieName == "Normal Zombie")
         {
@@ -168,15 +182,15 @@ public class Zombie : MonoBehaviour
 
             rigidBullet.velocity = velo.normalized * 5;
 
-            yield return new WaitForSeconds(zombieAttackSpeed);           
+            yield return new WaitForSeconds(zombieAttackSpeed);
         }
 
         isChase = true;
         isAttack = false;
         nav.isStopped = false;
         anim.SetBool("isAttack", isAttack);
-    } 
-    
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!isDie && (other.CompareTag("playerBullet") || other.CompareTag("BossBullet")))
@@ -236,24 +250,24 @@ public class Zombie : MonoBehaviour
     }
     IEnumerator OnDie()
     {
-        if (isDie)
-        {            
-            // 스코어 증가            
-            scoreManager.IncreaseScore(zombieScore);
-            // 아이템드롭
-            item.DropItem(itemPrefab, transform.position, zombieData.ZombieDropRate);
-            nav.isStopped = true;
-            isChase = false;
-            isAttack = false;
-            anim.SetTrigger("death");
-            rigidbody.useGravity = false;
-            boxCollider.enabled = false;
-            stageManager.zombieCount--;
+        isDie = true;
 
-            yield return new WaitForSeconds(2.5f);
-            Destroy(gameObject,3f);
-        }
- 
+        // 스코어 증가            
+        scoreManager.IncreaseScore(zombieScore);
+        // 아이템드롭
+        item.DropItem(itemPrefab, transform.position, zombieData.ZombieDropRate);
+        nav.isStopped = true;
+        isChase = false;
+        isAttack = false;
+        anim.SetTrigger("death");
+        rigidbody.useGravity = false;
+        boxCollider.enabled = false;
+        stageManager.zombieCount--;
+
+        yield return new WaitForSeconds(2.5f);
+        Destroy(gameObject, 3f);
+
+
         yield return null;
     }
 }
