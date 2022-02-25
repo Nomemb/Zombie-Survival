@@ -26,7 +26,7 @@ public class Zombie : MonoBehaviour
     public int zombieDamage;
     public float zombieAttackSpeed;
     public string zombieName;
-    public int zombiePoint;
+    public int zombieScore;
     private Animator anim;
 
 
@@ -50,7 +50,7 @@ public class Zombie : MonoBehaviour
 
         renderer = GetComponentsInChildren<Renderer>();
         // 스테이지별로 좀비 체력 증가
-        zombieHP = zombieData.ZombieHP + (int)(zombieData.ZombieHP * (stageManager.stage - 1) * 0.02);
+        zombieHP = zombieData.ZombieHP + (int)(zombieData.ZombieHP * (stageManager.stage - 1) * 0.05);
         zombieDamage = zombieData.ZombieDamage;
         zombieAttackSpeed = zombieData.ZombieAttackSpeed;
         zombieName = zombieData.ZombieName;
@@ -58,7 +58,7 @@ public class Zombie : MonoBehaviour
         // 보스 좀비 색 변경
         if (zombieName == "Boss Zombie")
         {
-            zombiePoint = 1000;
+            zombieScore = 1000;
             // 5스테이지마다 2씩 증가
             zombieDamage = zombieData.ZombieDamage + (stageManager.stage / 5) * 2;
             foreach (Renderer mesh in renderer)
@@ -68,7 +68,7 @@ public class Zombie : MonoBehaviour
         }
         else
         {
-            zombiePoint = 100;
+            zombieScore = 100;
         }
         isChase = true;
     }
@@ -123,13 +123,13 @@ public class Zombie : MonoBehaviour
 
         if(zombieName == "Normal Zombie")
         {
-            targetRadius = 1f;
+            targetRadius = 0.7f;
             targetRange = 0.3f;
         }
         else if(zombieName == "Boss Zombie")
         {
-            targetRadius = 0.5f;
-            targetRange = 5f;
+            targetRadius = 1f;
+            targetRange = 6f;
         }
         
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
@@ -239,7 +239,7 @@ public class Zombie : MonoBehaviour
         if (isDie)
         {            
             // 스코어 증가            
-            scoreManager.IncreaseScore(zombiePoint);
+            scoreManager.IncreaseScore(zombieScore);
             // 아이템드롭
             item.DropItem(itemPrefab, transform.position, zombieData.ZombieDropRate);
             nav.isStopped = true;

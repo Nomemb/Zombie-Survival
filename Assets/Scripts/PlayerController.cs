@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("EnemyBullet") || other.CompareTag("BossBullet"))
         {
-
             if (!isDamage)
             {
                 playerHP.CurrentHP -= other.GetComponent<EnemyBullet>().bulletDamage;

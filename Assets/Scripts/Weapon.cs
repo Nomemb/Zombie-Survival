@@ -8,7 +8,6 @@ public class Weapon : MonoBehaviour
     public int weaponDamage;
     public float weaponRPM; // 연사속도
     public float weaponRange; // 총알이 살아있는 시간( 사거리 )
-
     public int maxBullet; // 최대 장탄수
     public int currentBullet;
 

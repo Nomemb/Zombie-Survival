@@ -54,7 +54,7 @@ public class StageManager : MonoBehaviour
         stage += 1;
         info.AddInfo("====Stage " + stage + "====");
 
-        for (int i = 0; i < stage * 10; i++)
+        for (int i = 0; i < stage * 20; i++)
         {
             int random = Random.Range(0, 100);
             int randomZombie = (normalZombieSpawnRate <= random) ? (int)ZombieType.Boss : (int)ZombieType.Normal;

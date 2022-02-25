@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.81771994, y: 1.514741, z: 1}
-  m_Center: {x: -0.079459175, y: 0.7573705, z: 0.06781435}
+  m_Size: {x: 0.97182846, y: 1.514741, z: 1.0215319}
+  m_Center: {x: -0.038192034, y: 0.7573705, z: 0.07858026}
 --- !u!114 &1022640250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   zombieDamage: 0
   zombieAttackSpeed: 0
   zombieName: 
-  zombiePoint: 0
+  zombieScore: 0
 --- !u!195 &4572536120479451610
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1148,7 +1148,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 45

@@ -97,7 +97,7 @@ public class Item : MonoBehaviour
     public void DropItem(GameObject itemPrefab, Vector3 _position, int _dropRate)
     {
         int rand = Random.Range(0, 100);
-        if(_dropRate > rand)
+        if(_dropRate >= rand)
         {
             instantItem = Instantiate(itemPrefab, _position, itemPrefab.transform.rotation);
         }
