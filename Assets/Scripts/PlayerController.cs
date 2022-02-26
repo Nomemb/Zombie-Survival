@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Item item;
     private WeaponManager weaponManager;
     private StageManager stage;
-    private AudioSource audio;
+    public AudioSource audio;
     private Weapon currentWeapon;
     private float fireDelay; // 총 재사격 가능 시간
     private bool isFireDelay;

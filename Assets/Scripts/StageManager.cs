@@ -14,7 +14,7 @@ public class StageManager : MonoBehaviour
     public int stage;
     public int zombieCount;
     public enum ZombieType { Normal = 0, Boss }
-
+    public string sceneName;
     [SerializeField]
     private int normalZombieSpawnRate;
     private bool isClearStage;
@@ -99,7 +99,12 @@ public class StageManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void SelectMap()
+    {
+        SceneManager.LoadScene("Main");
     }
 
 }

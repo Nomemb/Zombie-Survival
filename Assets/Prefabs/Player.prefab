@@ -883,7 +883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a857677c93e9345bf0debb65b30abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 15
+  walkSpeed: 10
+  audio: {fileID: 7564216678405756217}
   isDamage: 0
   isDie: 0
 --- !u!82 &7564216678405756217

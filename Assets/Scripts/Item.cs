@@ -16,15 +16,17 @@ public class Item : MonoBehaviour
 
     private TextInfoManager info;
     private WeaponManager weaponManager;
+    private PlayerController player;
     private PlayerHP playerHP;
-    private AudioSource audio;
+    public AudioClip itemSound;
+
     [SerializeField]
     private Vector3 destinationPos;
     private void Start()
     {
         myRigid = GetComponent<Rigidbody>();        
         playerHP = FindObjectOfType<PlayerHP>();
-        audio = GetComponent<AudioSource>();
+        player = FindObjectOfType<PlayerController>();
 
         startPos = transform.position;
         info = FindObjectOfType<TextInfoManager>();
@@ -58,8 +60,9 @@ public class Item : MonoBehaviour
 
     public void GetItem()
     {
+        
         // 아직 아무 총도 해금되지 않았다면 체력만 회복
-        if(weaponManager.enableWeapons[1] == false)
+        if (weaponManager.enableWeapons[1] == false)
         {
             info.AddInfo("HP를 회복했습니다!");
             GetHPItem();
@@ -92,7 +95,8 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            audio.Play();
+            player.audio.clip = itemSound;
+            player.audio.Play();
             GetItem();
             Destroy(this.gameObject);
         }

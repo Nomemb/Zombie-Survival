@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a0fdd92c7df30854c830e0e6f9d09724,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1072,6 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: 0
   zombieCount: 0
+  sceneName: Map1
   normalZombieSpawnRate: 95
   spawnZones:
   - {fileID: 1610552290}
@@ -1293,7 +1295,8 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6653358777351640104, guid: c0e614dbdce83bd43a4330abb3bbf053, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c0e614dbdce83bd43a4330abb3bbf053, type: 3}
 --- !u!4 &444593321 stripped
 Transform:
@@ -1382,7 +1385,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 479251758}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 370353208}
+        m_MethodName: SelectMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &479251758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,7 +1458,7 @@ MonoBehaviour:
   weaponRange: 0.1
   maxBullet: 20
   currentBullet: 0
-  gunSound: {fileID: 8300000, guid: 6349a640dc07c3b4389c205f5b5a5145, type: 3}
+  gunSound: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
   bulletPos: {fileID: 190496131}
   bulletPrefabs: {fileID: 8267430409273687099, guid: 108e5239bfbe8614d9a0f222f2d3de4a,
     type: 3}
@@ -4276,7 +4290,7 @@ PrefabInstance:
     - target: {fileID: 4724888441592919281, guid: 86d703f2b71b2644cb909aa0dbd4ff18,
         type: 3}
       propertyPath: walkSpeed
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4724888441592919283, guid: 86d703f2b71b2644cb909aa0dbd4ff18,
         type: 3}

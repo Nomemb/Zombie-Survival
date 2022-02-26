@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunDropRate: 65
   itemPrefab: {fileID: 666617369670705774}
+  itemSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
   destinationPos: {x: 0, y: 0.5, z: 0}
 --- !u!82 &6653358777351640104
 AudioSource:
@@ -137,7 +138,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
