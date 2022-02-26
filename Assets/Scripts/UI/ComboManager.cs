@@ -35,12 +35,14 @@ public class ComboManager : MonoBehaviour
     public void IncreaseCombo()
     {
         currentCombo += 1;
+        comboResetTime *= (float)0.9f;
         comboDurationTime = 0;        
     }
 
     public void DecreaseCombo()
     {
         currentCombo -= 1;
+        comboResetTime *= (float)1.1f;
         comboDurationTime = 0;
 
     }

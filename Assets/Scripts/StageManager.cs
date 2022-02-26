@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class StageManager : MonoBehaviour
 {
@@ -12,13 +14,20 @@ public class StageManager : MonoBehaviour
     public int stage;
     public int zombieCount;
     public enum ZombieType { Normal = 0, Boss }
+    public string sceneName;
     [SerializeField]
     private int normalZombieSpawnRate;
     private bool isClearStage;
+
     [SerializeField]
     private Transform[] spawnZones;
     public GameObject[] zombies;
     private List<int> zombieList;
+
+    [SerializeField]
+    private GameObject mainPanel;
+    [SerializeField]
+    private GameObject gameOverPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +63,7 @@ public class StageManager : MonoBehaviour
         stage += 1;
         info.AddInfo("====Stage " + stage + "====");
 
-        for (int i = 0; i < stage * 10; i++)
+        for (int i = 0; i < stage * 20; i++)
         {
             int random = Random.Range(0, 100);
             int randomZombie = (normalZombieSpawnRate <= random) ? (int)ZombieType.Boss : (int)ZombieType.Normal;
@@ -79,4 +88,23 @@ public class StageManager : MonoBehaviour
         }
         ClearStage();
     }
+
+    public void GameOver()
+    {
+        int _currentScore = mainPanel.GetComponentInChildren<ScoreManager>().currentScore;
+        mainPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+        gameOverPanel.GetComponentInChildren<ScoreManager>().currentScore = _currentScore;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void SelectMap()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
 }
