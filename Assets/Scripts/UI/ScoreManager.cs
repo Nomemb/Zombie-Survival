@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
         int _currentCombo = comboManager.CurrentCombo;
         currentScore += _score * _currentCombo;
         comboManager.IncreaseCombo();
-        // 콤보 0일때 점수 오르지 않는 현상 방지
+        
         anim.SetTrigger("ScoreUP");
     }
 

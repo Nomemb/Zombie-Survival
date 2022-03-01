@@ -58,9 +58,7 @@ public class WeaponManager : MonoBehaviour
                 info.AddInfo(weapons[randomWeapon].GetComponent<Weapon>().weaponName + " 을 획득했습니다!");
                 return;
             }
-
         }
-
     }
 
     private void LevelUP()
@@ -325,6 +323,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon.SetActive(true);
     }
 
+    // 총알이 다 떨어졌을 때 실행
     public void OutOfAmmo()
     {
         currentWeapon.SetActive(false);

@@ -59,8 +59,7 @@ public class Item : MonoBehaviour
     }
 
     public void GetItem()
-    {
-        
+    {        
         // 아직 아무 총도 해금되지 않았다면 체력만 회복
         if (weaponManager.enableWeapons[1] == false)
         {
@@ -85,7 +84,7 @@ public class Item : MonoBehaviour
 
     }
 
-    // 체력을 최대치로 회복 ( 차후에 일정 수치만큼 회복으로 바꿀수도 있음 ) 
+    // 체력을 최대치로 회복
     private void GetHPItem()
     {
         playerHP.CurrentHP = playerHP.MaxHP;
