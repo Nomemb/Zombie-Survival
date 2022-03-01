@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
         {
             Move();
             Shoot();
-
         }
     }
 
@@ -64,9 +63,7 @@ public class PlayerController : MonoBehaviour
             }
             anim.SetBool("isWalk", moveVec != Vector3.zero);
             transform.LookAt(transform.position + moveVec);
-
         }
-
     }
 
     private void Shoot()
@@ -82,7 +79,6 @@ public class PlayerController : MonoBehaviour
             currentWeapon.Shoot();
             fireDelay = 0;
         }
-
     }
 
     private void FreezeRotation()

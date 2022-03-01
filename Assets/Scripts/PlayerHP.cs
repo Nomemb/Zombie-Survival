@@ -44,19 +44,20 @@ public class PlayerHP : MonoBehaviour
         {
             HPRegen();
         }
-
-
     }
 
     private void HPRegen()
     {
-        perfectGameTime += Time.deltaTime;
-        if (playerController.isDamage)
-            perfectGameTime = 0;
-        if(perfectGameTime > hpRegenTime)
+        if (currentHP < maxHP)
         {
-            currentHP += 20;
-            perfectGameTime = 0;
+            perfectGameTime += Time.deltaTime;
+            if (playerController.isDamage)
+                perfectGameTime = 0;
+            if(perfectGameTime > hpRegenTime)
+            {
+                currentHP += 20;
+                perfectGameTime = 0;
+            }
         }
     }
 }

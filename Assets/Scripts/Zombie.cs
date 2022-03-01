@@ -37,7 +37,6 @@ public class Zombie : MonoBehaviour
     private bool isDamage;
     private bool isDie;
 
-
     private Renderer[] renderer;
     // Start is called before the first frame update
     void Start()
@@ -53,6 +52,7 @@ public class Zombie : MonoBehaviour
         stageManager = FindObjectOfType<StageManager>();
 
         renderer = GetComponentsInChildren<Renderer>();
+
         // 스테이지별로 좀비 체력 증가
         zombieHP = zombieData.ZombieHP + (int)(zombieData.ZombieHP * (stageManager.stage - 1) * 0.05);
         zombieDamage = zombieData.ZombieDamage;
@@ -83,14 +83,12 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isChase && !isDie && !isDamage)
         {
             nav.SetDestination(target.position);
             anim.SetBool("isChase", isChase);
-
         }
     }
 
@@ -108,9 +106,7 @@ public class Zombie : MonoBehaviour
         else
         {
             nav.isStopped = true;
-
         }
-
     }
 
     private void FreezeVelocity()
@@ -141,8 +137,7 @@ public class Zombie : MonoBehaviour
         {
             targetRadius = 1f;
             targetRange = 6f;
-        }
-        
+        }        
 
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
@@ -159,17 +154,13 @@ public class Zombie : MonoBehaviour
         nav.isStopped = true;
         anim.SetBool("isAttack", isAttack);
 
-
-
         if (zombieName == "Normal Zombie")
         {
             yield return new WaitForSeconds(0.5f);
             meleeArea.enabled = true;
 
-
             yield return new WaitForSeconds(zombieAttackSpeed);
             meleeArea.enabled = false;
-
         }
         else if (zombieName == "Boss Zombie")
         {
@@ -211,10 +202,9 @@ public class Zombie : MonoBehaviour
             else
             {
                 EnemyBullet bullet = other.GetComponent<EnemyBullet>();
-                zombieHP -= (bullet.bulletDamage / 2);
+                zombieHP -= (bullet.bulletDamage / 3);
                 reactVec = new Vector3(other.transform.position.x - transform.position.x, 0, other.transform.position.z - transform.position.z);
                 Destroy(other.gameObject);
-
             }
             StartCoroutine(OnDamage(reactVec));
         }
@@ -266,8 +256,6 @@ public class Zombie : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject, 3f);
-
-
         yield return null;
     }
 }

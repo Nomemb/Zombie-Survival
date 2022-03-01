@@ -34,7 +34,6 @@ public class StageManager : MonoBehaviour
         zombieList = new List<int>();
         info = FindObjectOfType<TextInfoManager>();
         player = FindObjectOfType<PlayerController>();
-
     }
 
     // Update is called once per frame
