@@ -911,5 +911,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main.unity
   - Assets/Scenes/Map1.unity
   - Assets/Scenes/Map2.unity
-  playerPath: "C:/Users/nkj12/OneDrive/\uBC14\uD0D5 \uD654\uBA74/Github/Zombie-Survival/Build/Zombie
+  playerPath: "C:/Users/nkj12/OneDrive/\uBC14\uD0D5 \uD654\uBA74/Github/Zombie-Survival/Build/v0.2/Zombie
     Survival.exe"

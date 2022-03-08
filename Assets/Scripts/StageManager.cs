@@ -62,7 +62,7 @@ public class StageManager : MonoBehaviour
         stage += 1;
         info.AddInfo("====Stage " + stage + "====");
 
-        for (int i = 0; i < stage * 20; i++)
+        for (int i = 0; i < stage * 15; i++)
         {
             int random = Random.Range(0, 100);
             int randomZombie = (normalZombieSpawnRate <= random) ? (int)ZombieType.Boss : (int)ZombieType.Normal;
@@ -78,7 +78,7 @@ public class StageManager : MonoBehaviour
             zombie.target = player.transform;
             zombieList.RemoveAt(0);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
         }
 
         while (zombieCount > 0)
