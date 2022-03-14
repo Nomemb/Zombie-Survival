@@ -31,7 +31,9 @@ public class Zombie : MonoBehaviour
     private AudioSource audio;
     private Animator anim;
 
+    private float attackDelay;
 
+    private bool isAttackDelay;
     private bool isChase;
     private bool isAttack;
     private bool isDamage;
@@ -46,7 +48,7 @@ public class Zombie : MonoBehaviour
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
         nav = GetComponent<NavMeshAgent>();
-        
+
         item = FindObjectOfType<Item>();
         scoreManager = FindObjectOfType<ScoreManager>();
         stageManager = FindObjectOfType<StageManager>();
@@ -137,13 +139,17 @@ public class Zombie : MonoBehaviour
         {
             targetRadius = 1f;
             targetRange = 6f;
-        }        
+        }
 
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.green);
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
-        if (rayHits.Length > 0 && !isAttack)
+
+        attackDelay += Time.deltaTime;
+        isAttackDelay = attackDelay > zombieAttackSpeed;
+        if (rayHits.Length > 0 && isAttackDelay && !isDamage)
         {
             StartCoroutine(AttackCoroutine());
+            attackDelay = 0;
         }
     }
 
@@ -152,6 +158,7 @@ public class Zombie : MonoBehaviour
         isChase = false;
         isAttack = true;
         nav.isStopped = true;
+
         anim.SetBool("isAttack", isAttack);
 
         if (zombieName == "Normal Zombie")
@@ -176,10 +183,12 @@ public class Zombie : MonoBehaviour
             yield return new WaitForSeconds(zombieAttackSpeed);
         }
 
+
         isChase = true;
         isAttack = false;
         nav.isStopped = false;
         anim.SetBool("isAttack", isAttack);
+
     }
 
     private void OnTriggerEnter(Collider other)

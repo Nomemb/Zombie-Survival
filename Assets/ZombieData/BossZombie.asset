@@ -15,5 +15,5 @@ MonoBehaviour:
   zombieName: Boss Zombie
   zombieHP: 250
   zombieDamage: 35
-  zombieAttackSpeed: 0.3
+  zombieAttackSpeed: 1.7
   zombieDropRate: 100
